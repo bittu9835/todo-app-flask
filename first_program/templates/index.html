@@ -47,7 +47,12 @@
 <div class="container">
     <h2>Your Tasks</h2>
     <table class="table">
-        <thead>
+          {% if alltodo|length==0 %}
+          <div class="alert alert-dark" role="alert">
+        No Record Found! pls Add Record 
+          </div>
+          {% else %}
+          <thead>
           <tr>
             <th scope="col">Sno</th>
             <th scope="col">Title</th>
@@ -69,6 +74,7 @@
             </td>
           </tr>
           {% endfor %}
+          {% endif %}
         </tbody>
       </table>
 </div>
