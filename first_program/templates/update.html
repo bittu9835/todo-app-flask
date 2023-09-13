@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container">
+    <h2>Your Tasks</h2>
+    <table class="table">
+          {% if todos|length==0 %}
+          <div class="alert alert-dark" role="alert">
+        No Record Found! pls Add Record 
+          </div>
+          {% else %}
+          <thead>
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">Title</th>
+            <th scope="col">Task</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for todo in todos %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{todo.title}}</td>
+            <td>{{todo.des}}</td>
+            <td>{{todo.createdAt}}</td>
+            <td>
+              <a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-dark mx-1">Update</a>
+              <a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-dark mx-1">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+</div>
+{% endblock body %}

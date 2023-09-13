@@ -39,9 +39,10 @@ def product():
     alltodo = Todo.query.all()
     return render_template('index.html', alltodo=alltodo)
 
-@app.route("/update")
-def update():
-    return "<p>This is the home page.</p>"
+@app.route("/update/<int:sno>")
+def update(sno):
+    todo=Todo.query.filter_by(sno=sno).first()
+    return render_template('update.html', todos=todo)
 
 @app.route("/delete/<int:sno>")
 def delete(sno):
