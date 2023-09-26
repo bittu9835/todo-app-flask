@@ -1,38 +1,19 @@
+<!-- update.html -->
 {% extends 'base.html' %}
-{% block body %}
 
+{% block body %}
 <div class="container">
-    <h2>Your Tasks</h2>
-    <table class="table">
-          {% if todos|length==0 %}
-          <div class="alert alert-dark" role="alert">
-        No Record Found! pls Add Record 
-          </div>
-          {% else %}
-          <thead>
-          <tr>
-            <th scope="col">Sno</th>
-            <th scope="col">Title</th>
-            <th scope="col">Task</th>
-            <th scope="col">Date</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for todo in todos %}
-          <tr>
-            <th scope="row">{{loop.index}}</th>
-            <td>{{todo.title}}</td>
-            <td>{{todo.des}}</td>
-            <td>{{todo.createdAt}}</td>
-            <td>
-              <a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-dark mx-1">Update</a>
-              <a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-dark mx-1">Delete</a>
-            </td>
-          </tr>
-          {% endfor %}
-          {% endif %}
-        </tbody>
-      </table>
+    <h1>Update Task</h1>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" value="{{ todo.title }}" required class="form-control" id="title">
+        </div>
+        <div class="mb-3">
+            <label for="des" class="form-label">Task</label>
+            <input type="text" name="des" value="{{ todo.des }}" required class="form-control" id="des">
+        </div>
+        <input type="submit" value="Update" class="btn btn-dark">
+    </form>
 </div>
 {% endblock body %}

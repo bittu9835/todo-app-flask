@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 {% block body %}
-  
-
 <div class="container">
     <h1>Add Task</h1>
     <form action="/" method="POST" id="task-form">
@@ -15,7 +13,6 @@
         <button type="submit" class="btn btn-dark">Add</button>
       </form>
 </div>
-
 <div class="container">
     <h2>Your Tasks</h2>
     <table class="table">
@@ -39,7 +36,7 @@
             <th scope="row">{{loop.index}}</th>
             <td>{{todo.title}}</td>
             <td>{{todo.des}}</td>
-            <td>{{todo.createdAt}}</td>
+            <td>{{ todo.createdAt }}</td>
             <td>
               <a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-dark mx-1">Update</a>
               <a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-dark mx-1">Delete</a>
@@ -50,28 +47,5 @@
         </tbody>
       </table>
 </div>
-
-<!-- <script>
-  document.getElementById("task-form").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    // Get form data
-    const formData = new FormData(this);
-
-    // Send a POST request to the Flask server
-    fetch("/", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json()) // Assuming your Flask server returns JSON data
-      .then((data) => {
-        // Handle the response data as needed
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
-</script> -->
 {% endblock body %}
     

@@ -1,3 +1,5 @@
+# to create env run commad   .\env\Scripts\activate
+# to kill env run commad      deactivate
 from flask import Flask, render_template ,request ,redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -37,12 +39,22 @@ def product():
         # return jsonify({"success": True, "message": "Task added successfully"})
 
     alltodo = Todo.query.all()
+    # Format the date in the custom format
+    for todo in alltodo:
+        todo.createdAt = todo.createdAt.strftime('%d %b %Y')
     return render_template('index.html', alltodo=alltodo)
 
-@app.route("/update/<int:sno>")
+@app.route("/update/<int:sno>", methods=['GET', 'POST'])
 def update(sno):
-    todo=Todo.query.filter_by(sno=sno).first()
-    return render_template('update.html', todos=todo)
+    todo = Todo.query.get(sno)
+
+    if request.method == 'POST':
+        todo.title = request.form['title']
+        todo.des = request.form['des']
+        db.session.commit()
+        return redirect('/')
+
+    return render_template('update.html', todo=todo)
 
 @app.route("/delete/<int:sno>")
 def delete(sno):
